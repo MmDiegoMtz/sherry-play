@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>Doodle Jump</title>
+
+<link rel="stylesheet" href="style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<a href="../../juegos.html" id="backBtn" class="back-btn" aria-label="Volver a juegos">← Volver a juegos</a>
+
+<div class="game-wrapper">
+  <div class="game-ui">
+    <span class="score-label">Puntos</span>
+    <span id="scoreEl" class="score-value">0</span>
+    <span class="high-score-label">Mejor</span>
+    <span id="highScoreEl" class="high-score-value">0</span>
+  </div>
+
+  <canvas id="gameCanvas" width="480" height="600"></canvas>
+
+  <div class="mobile-controls" id="mobileControls">
+    <button type="button" class="ctrl-btn ctrl-left" id="btnLeft" aria-label="Mover a la izquierda">←</button>
+    <button type="button" class="ctrl-btn ctrl-right" id="btnRight" aria-label="Mover a la derecha">→</button>
+  </div>
+
+  <div id="startOverlay" class="overlay overlay-start">
+    <h1>Doodle Jump</h1>
+    <p>Usa <kbd>←</kbd> <kbd>→</kbd> o <kbd>A</kbd> <kbd>D</kbd> para moverte</p>
+    <p class="mobile-hint">O toca las flechas en pantalla en el móvil</p>
+    <p>¡Aterriza en las plataformas para saltar más alto!</p>
+    <button type="button" id="startBtn" class="btn-start">Jugar</button>
+  </div>
+
+  <div id="gameOverOverlay" class="overlay overlay-gameover hidden">
+    <h2>Fin del juego</h2>
+    <p>Puntuación: <span id="finalScoreEl">0</span></p>
+    <button type="button" id="restartBtn" class="btn-start">Jugar de nuevo</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html> 

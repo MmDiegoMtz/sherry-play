@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Árbol de Amor Animado</title>
+<meta name="description" content="Árbol de Amor Animado: una sorpresa interactiva y romántica para dedicar a tu pareja o ser querido.">
+<meta name="keywords" content="amor, sorpresa, romántico, dedicatoria, animación, árbol, corazones, pareja, aniversario, regalo digital">
+<meta name="robots" content="index, follow">
+<!-- Estilos -->
+<link rel="stylesheet" href="css/carta.css">
+<link rel="stylesheet" href="css/carta.mobile.css" media="only screen and (max-width: 600px)">
+<style>
+.tree-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  z-index: 2;
+}
+.animated-heart {
+  transform-origin: center;
+  animation: beat 1s infinite;
+}
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.1); }
+  40% { transform: scale(0.95); }
+  60% { transform: scale(1.08); }
+  80% { transform: scale(1); }
+}
+</style>
+</head>
+<body>
+<div id="floating-objects"></div>
+<div class="dedication-text" id="dedication-text">
+  <div class="signature" id="signature"></div>
+</div>
+<div class="tree-container" id="tree-container"></div>
+
+<!-- Botón fijo para volver al bosque -->
+<a href="index.html" id="back-to-forest-btn">🌲 Volver al bosque</a>
+
+<audio src="audio/level6.mp3" id="bg-music" preload="auto" loop></audio>
+<script src="js/carta.js"></script>
+</body>
+</html>

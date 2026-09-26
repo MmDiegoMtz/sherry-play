@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+:root {
+  /* Paleta inspirada en Snoopy */
+  --snoopy-white: #fdfdfb;
+  --snoopy-black: #1c1c1c;
+  --snoopy-red: #d62828;
+  --snoopy-blue: #4a6fa5;
+  --snoopy-cream: #f4ecd8;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  background: var(--snoopy-cream);
+  text-align: center;
+  touch-action: manipulation;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  line-height: 1;
+  margin: 2rem 0 0 0;
+  color: var(--snoopy-red);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--snoopy-black);
+  margin: 1.5rem;
+}
+
+.score {
+  background: var(--snoopy-white);
+  border: 2px solid var(--snoopy-blue);
+  padding: 0 3rem;
+  line-height: 1.6;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  border-radius: 1rem;
+  color: var(--snoopy-black);
+}
+
+.game {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.hole {
+  position: relative;
+  width: 33.3333%;
+  padding-bottom: 33.3333%; /* fuerza un cuadro perfecto sin depender de aspect-ratio */
+  overflow: hidden;
+  isolation: isolate; /* crea un contexto de apilamiento propio por agujero */
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+.hole:after {
+  display: block;
+  content: "";
+  width: 78%;
+  height: 22%;
+  position: absolute;
+  z-index: 1;
+  bottom: 4%;
+  left: 11%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--snoopy-black) 0%,
+    var(--snoopy-black) 45%,
+    transparent 75%
+  );
+  border-radius: 50%;
+  opacity: 0.85;
+}
+
+.mole {
+  background-image: url("https://i.ibb.co/8D8mkxN4/Chat-GPT-Image-26-sept-2026-01-41-12-a-m.png");
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  position: absolute;
+  left: 0;
+  bottom: -55%; /* escondido, justo debajo de su agujero */
+  width: 100%;
+  height: 55%; /* caja más chica pegada al fondo, no toda la celda */
+  transition: bottom 0.18s ease-out;
+  z-index: 2;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.hole.up .mole {
+  bottom: 0;
+}
+
+#start {
+  font-family: "Nunito", sans-serif;
+  display: inline-block;
+  text-decoration: none;
+  border: 3px solid var(--snoopy-black);
+  border-radius: 8px;
+  background: var(--snoopy-red);
+  color: var(--snoopy-white);
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  padding: 1rem 2rem;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+#start:hover {
+  opacity: 0.85;
+}
+
+/* Botón fijo para volver a la lista de juegos */
+#home-button {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top, 0px));
+  left: 12px;
+  z-index: 999;
+  background-color: var(--snoopy-black);
+  color: var(--snoopy-white);
+  font-family: "Nunito", sans-serif;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--snoopy-red);
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+#home-button:active {
+  transform: scale(0.96);
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+  h1 {
+    margin-top: 3.2rem;
+  }
+  .game {
+    padding: 0 6px;
+  }
+  #home-button {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}

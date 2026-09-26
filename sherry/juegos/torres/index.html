@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<title>Torre de Bloques</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!-- Botón fijo para volver al listado de juegos -->
+<a id="home-button" href="../../juegos.html" aria-label="Volver a juegos">⟵ Volver a juegos</a>
+
+<!-- Música de fondo -->
+<audio id="bg-music" src="../../audio/level5.mp3" loop preload="auto"></audio>
+
+<div id="container">
+  <div id="game"></div>
+  <div id="score">0</div>
+  <div id="instructions">
+    Toca la pantalla (o presiona la barra espaciadora) para colocar el bloque
+  </div>
+  <div class="game-over">
+    <h2>Fin del juego</h2>
+    <p>Eres la mejor &lt;3</p>
+    <p>Toca la pantalla o presiona la barra espaciadora para volver a jugar</p>
+  </div>
+  <div class="game-ready">
+    <div id="start-button">Iniciar</div>
+    <div></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

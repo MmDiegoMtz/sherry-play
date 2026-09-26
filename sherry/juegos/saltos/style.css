@@ -1,0 +1,288 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 12px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  padding-left: max(12px, env(safe-area-inset-left));
+  padding-right: max(12px, env(safe-area-inset-right));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  font-family: "Nunito", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+/* Persistent back button, always visible above everything */
+.back-btn {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  left: max(10px, env(safe-area-inset-left));
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-family: "Nunito", sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.back-btn:active {
+  transform: scale(0.96);
+}
+
+.game-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: min(480px, 95vw);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.06);
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 480 / 600;
+  max-height: 85dvh;
+  height: auto;
+  background: linear-gradient(180deg, #8ecae6 0%, #eaf6fb 45%, #ffffff 100%);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.game-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent);
+}
+
+.score-label,
+.high-score-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-right: 4px;
+}
+
+.high-score-label {
+  margin-left: 12px;
+}
+
+.score-value,
+.high-score-value {
+  font-family: "Fredoka One", cursive;
+  font-size: 22px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.high-score-value {
+  color: #d62828;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 24px;
+  text-align: center;
+  overflow-y: auto;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-start h1 {
+  font-family: "Fredoka One", cursive;
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
+  color: #fff;
+  margin: 0 0 16px;
+  text-shadow: 0 4px 0 #d62828, 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.overlay-start p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 8px 0;
+  font-size: clamp(0.85rem, 3.5vw, 1rem);
+}
+
+.overlay-start kbd {
+  display: inline-block;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9em;
+}
+
+.btn-start {
+  margin-top: 24px;
+  padding: 14px 40px;
+  font-family: "Fredoka One", cursive;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  background: linear-gradient(180deg, #f4c430 0%, #e6b800 100%);
+  border: 2px solid #1a1a1a;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #a37c00, 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s, box-shadow 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #a37c00, 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.btn-start:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 #a37c00, 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-gameover h2 {
+  font-family: "Fredoka One", cursive;
+  font-size: clamp(1.5rem, 7vw, 2rem);
+  color: #d62828;
+  margin: 0 0 8px;
+}
+
+.overlay-gameover p {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(1rem, 4vw, 1.1rem);
+  margin: 8px 0;
+}
+
+.overlay-gameover #finalScoreEl {
+  font-family: "Fredoka One", cursive;
+  color: #f4c430;
+}
+
+/* Mobile control buttons */
+.mobile-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.mobile-controls .ctrl-btn {
+  pointer-events: auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s, background 0.1s;
+}
+
+.mobile-controls .ctrl-btn:active,
+.mobile-controls .ctrl-btn.active {
+  background: rgba(214, 40, 40, 0.8);
+  transform: scale(0.95);
+}
+
+@media (hover: hover) {
+  .mobile-controls .ctrl-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+}
+
+.overlay-start .mobile-hint {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Small phones: tighten spacing so nothing is cut off */
+@media (max-width: 380px) {
+  body {
+    padding: 6px;
+  }
+  .back-btn {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  .mobile-controls .ctrl-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 22px;
+  }
+  .score-value,
+  .high-score-value {
+    font-size: 18px;
+  }
+}
+
+/* Short landscape phones (fullscreen game view) */
+@media (max-height: 480px) and (orientation: landscape) {
+  .game-wrapper {
+    max-width: none;
+    width: auto;
+    height: 100dvh;
+  }
+  #gameCanvas {
+    max-height: 100dvh;
+    width: auto;
+    height: 100%;
+  }
+}

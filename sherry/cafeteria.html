@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>La Cafetería de Snoopy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="contenedor-cafeteria">
+    <div class="escenario-cafeteria">
+        <img id="imgCafeteria" alt="Cafetería">
+        <div id="contenedorPuntos"></div>
+    </div>
+</div>
+
+<!-- Botón de regresar -->
+<button id="btnRegresar" class="boton-flotante boton-regresar" title="Regresar">
+    <span class="material-symbols-outlined">arrow_back</span>
+</button>
+
+<!-- Mensaje oculto descubierto -->
+<div id="overlayMensajeOculto" class="overlay oculto overlay--mensaje">
+    <div class="tarjeta-overlay tarjeta-mensaje">
+        <span class="material-symbols-outlined icono-cargando">favorite</span>
+        <p id="textoMensajeOculto" class="texto-mensaje"></p>
+        <div class="botones-overlay">
+            <button id="btnContinuarMensaje" class="boton-juego boton-juego--primario">Continuar explorando</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/config-cafeteria.js"></script>
+<script src="js/game-cafeteria.js"></script>
+</body>
+</html>

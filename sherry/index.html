@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>El Bosque de Snoopy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Lienzo principal del juego -->
+<canvas id="lienzo"></canvas>
+
+<!-- Pantalla de carga -->
+<div id="pantallaCarga" class="overlay">
+    <div class="tarjeta-overlay">
+        <span class="material-symbols-outlined icono-cargando">favorite</span>
+        <p>Preparando el bosque mágico…</p>
+    </div>
+</div>
+
+<!-- Pantalla inicial: activar sonido para entrar -->
+<div id="pantallaMusica" class="overlay oculto">
+    <div class="tarjeta-overlay">
+        <h1>El Bosque de Snoopy</h1>
+        <p>Activa el sonido para vivir la experiencia completa</p>
+        <div class="botones-overlay">
+            <button id="btnMusicaSi" class="boton-juego boton-juego--primario">Activar y entrar al bosque</button>
+        </div>
+    </div>
+</div>
+
+<!-- Aviso de orientación en móvil -->
+<div id="avisoOrientacion" class="overlay oculto">
+    <div class="tarjeta-overlay">
+        <span class="material-symbols-outlined icono-rotar">screen_rotation</span>
+        <p>Gira tu teléfono para explorar el bosque en horizontal</p>
+    </div>
+</div>
+
+<!-- Indicación de controles (computadora) -->
+<div id="pistaTeclado" class="pista-controles oculto">WASD para moverte</div>
+
+<!-- Indicador discreto del ciclo día / noche -->
+<div id="indicadorCiclo" class="indicador-ciclo oculto">
+    <div class="indicador-ciclo__icono">
+        <span class="material-symbols-outlined indicador-ciclo__sol" id="iconoSol">clear_day</span>
+        <span class="material-symbols-outlined indicador-ciclo__luna" id="iconoLuna">bedtime</span>
+    </div>
+    <div class="indicador-ciclo__info">
+        <span class="indicador-ciclo__hora" id="horaCiclo">12:00 PM</span>
+        <div class="indicador-ciclo__barra">
+            <div class="indicador-ciclo__progreso" id="progresoCiclo"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Aviso de interacción con un lugar -->
+<div id="avisoInteraccion" class="aviso-interaccion oculto">
+    <p id="textoInteraccion">¿Encontraste algo?</p>
+    <p id="pistaInteraccionTeclado" class="pista-chica">Presiona E para entrar</p>
+    <button id="btnAceptarInteraccion" class="boton-juego boton-juego--primario oculto">Aceptar</button>
+</div>
+
+<!-- Mensaje temporal (ej. "este lugar aún no tiene enlace") -->
+<div id="mensajeFlotante" class="mensaje-flotante oculto"></div>
+
+<!-- Controles táctiles (móvil, horizontal) -->
+<div id="controlesTactiles" class="controles-tactiles oculto">
+    <div class="dpad">
+        <button class="boton-dpad boton-dpad--arriba" data-direccion="arriba">
+            <span class="material-symbols-outlined">keyboard_arrow_up</span>
+        </button>
+        <button class="boton-dpad boton-dpad--izquierda" data-direccion="izquierda">
+            <span class="material-symbols-outlined">keyboard_arrow_left</span>
+        </button>
+        <button class="boton-dpad boton-dpad--derecha" data-direccion="derecha">
+            <span class="material-symbols-outlined">keyboard_arrow_right</span>
+        </button>
+        <button class="boton-dpad boton-dpad--abajo" data-direccion="abajo">
+            <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </button>
+    </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

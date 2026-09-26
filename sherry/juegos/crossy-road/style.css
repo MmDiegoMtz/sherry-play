@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P");
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: "Press Start 2P", cursive;
+  font-size: 2em;
+  color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  box-shadow: 3px 5px 0px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* Botón fijo para volver al listado de juegos, siempre visible */
+.back-btn {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-family: "Press Start 2P", cursive;
+  font-size: 11px;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.back-btn:active {
+  transform: scale(0.96);
+}
+
+#counter {
+  position: absolute;
+  top: max(20px, env(safe-area-inset-top));
+  right: max(20px, env(safe-area-inset-right));
+  font-size: clamp(1.1rem, 5vw, 2rem);
+  z-index: 10;
+}
+
+#end {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  z-index: 500;
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#end button {
+  background-color: red;
+  padding: 20px 50px 20px 50px;
+  font-family: inherit;
+  font-size: clamp(0.9rem, 4vw, 2rem);
+}
+
+#controlls {
+  display: none;
+}
+
+/* Zonas táctiles: izquierda = izquierda, derecha = derecha,
+   arriba en el centro = adelante, abajo en el centro = atrás */
+#touchZones {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  touch-action: none;
+}
+
+.zone-hint {
+  position: fixed;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 2rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  z-index: 6;
+}
+
+.hint-left {
+  left: max(16px, env(safe-area-inset-left));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hint-right {
+  right: max(16px, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hint-forward {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+}
+
+.hint-backward {
+  left: 50%;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+}

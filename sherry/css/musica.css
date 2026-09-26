@@ -1,0 +1,1151 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ==========================================================================
+   AVENTURA MUSICAL DE SNOOPY — estilos
+   ========================================================================== */
+
+:root {
+    --rosa-pastel: #EFA3C8;
+    --rosa: #D85B9F;
+    --lila-pastel: #B99AD9;
+    --lila: #8E6BB5;
+    --purpura: #68458F;
+    --purpura-oscuro: #3E285E;
+    --luz-calida: #FFD27A;
+    --crema: #FFF3E2;
+    --verde: #6E9B72;
+    --agua: #8FC3D9;
+
+    --sombra-flotante: 0 14px 34px rgba(31, 14, 54, 0.38);
+    --transicion: 260ms cubic-bezier(.22, .68, .35, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: var(--purpura-oscuro);
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--crema);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+}
+
+body { position: fixed; inset: 0; touch-action: manipulation; }
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    user-select: none;
+}
+
+.oculto { display: none !important; }
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { text-decoration: none; }
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--luz-calida);
+    outline-offset: 3px;
+}
+
+/* ==========================================================================
+   CAPAS A PANTALLA COMPLETA
+   ========================================================================== */
+
+.capa {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right))
+             max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+}
+
+.capa-solida {
+    background:
+        radial-gradient(120% 90% at 50% 10%, rgba(185, 154, 217, .35), transparent 60%),
+        linear-gradient(180deg, #33204F 0%, #241640 60%, #1B1030 100%);
+}
+
+/* ---------- Pantalla de inicio ---------- */
+
+.carga-contenido {
+    max-width: 560px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.snoopy-carga { width: 92px; height: 116px; image-rendering: pixelated; }
+
+.titulo-juego {
+    margin: 0;
+    font-size: clamp(24px, 4.4vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.subtitulo-juego {
+    margin: 0;
+    max-width: 42ch;
+    color: rgba(255, 243, 226, .78);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.estado-carga {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: rgba(255, 243, 226, .6);
+    min-height: 18px;
+}
+
+.boton-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--rosa) 0%, var(--lila) 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(216, 91, 159, .35);
+    transition: transform var(--transicion);
+}
+
+.boton-principal:hover { transform: translateY(-2px); }
+.boton-principal:active { transform: translateY(1px); }
+
+.boton-secundario {
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 243, 226, .3);
+    box-shadow: none;
+    font-size: 14px;
+    padding: 11px 20px;
+}
+
+.boton-icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    color: var(--crema);
+    transition: background var(--transicion);
+}
+
+.boton-icono:hover { background: rgba(255, 255, 255, .22); }
+
+/* ---------- Aviso de orientación ---------- */
+
+#avisoOrientacion { z-index: 120; flex-direction: column; gap: 14px; }
+.icono-girar { font-size: 58px; color: var(--luz-calida); animation: girar 2.4s ease-in-out infinite; }
+.texto-girar { margin: 0; font-size: 17px; font-weight: 600; }
+
+@keyframes girar {
+    0%, 100% { transform: rotate(0deg); }
+    45%, 65% { transform: rotate(90deg); }
+}
+
+/* ==========================================================================
+   HUD
+   ========================================================================== */
+
+#hud {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: calc(8px + env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+             8px max(12px, env(safe-area-inset-left));
+    background: linear-gradient(180deg, rgba(27, 16, 48, .85) 0%, rgba(27, 16, 48, 0) 100%);
+    pointer-events: none;
+}
+
+#hud button, #hud a { pointer-events: auto; }
+
+.hud-nivel { display: flex; align-items: center; gap: 10px; min-width: 0; }
+
+.hud-numero {
+    flex: none;
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    border-radius: 11px;
+    background: rgba(255, 210, 122, .16);
+    border: 1px solid rgba(255, 210, 122, .5);
+    color: var(--luz-calida);
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.hud-textos { min-width: 0; }
+.hud-textos h2 {
+    margin: 0; font-size: 15px; font-weight: 600; line-height: 1.25;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hud-textos p { margin: 2px 0 0; font-size: 12.5px; color: rgba(255, 243, 226, .72); line-height: 1.3; }
+
+.hud-derecha { display: flex; align-items: center; gap: 10px; flex: none; }
+
+.tira-fragmentos { display: flex; gap: 3px; }
+
+.tira-fragmentos span {
+    width: 8px; height: 26px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, .14);
+    border: 1px solid rgba(255, 255, 255, .18);
+    transition: background var(--transicion), box-shadow var(--transicion);
+}
+
+.tira-fragmentos span.tiene {
+    background: var(--luz-calida);
+    border-color: var(--luz-calida);
+    box-shadow: 0 0 10px rgba(255, 210, 122, .6);
+}
+
+/* ==========================================================================
+   ESCENA
+   ========================================================================== */
+
+#escena { position: fixed; inset: 0; z-index: 10; overflow: hidden; }
+
+.nivel { position: absolute; inset: 0; animation: entradaNivel 520ms ease both; }
+
+@keyframes entradaNivel {
+    from { opacity: 0; transform: scale(1.03); }
+    to { opacity: 1; transform: none; }
+}
+
+.capa-escena { position: absolute; inset: 0; }
+.capa-escena svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- Puntos interactivos ---------- */
+
+.punto {
+    --escala: 1;
+    position: absolute;
+    transform: translate(-50%, -50%) scale(var(--escala));
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border-radius: 50%;
+    transition: transform 180ms ease, filter 180ms ease;
+}
+
+.punto:hover { transform: translate(-50%, -50%) scale(calc(var(--escala) * 1.07)); }
+.punto svg, .punto img { overflow: visible; display: block; pointer-events: none; }
+.punto img { filter: drop-shadow(0 6px 8px rgba(20, 10, 35, .35)); }
+
+.punto.error { animation: negar 420ms ease; }
+.punto.acierto { animation: latido 900ms ease forwards; }
+.punto.encontrado { filter: drop-shadow(0 0 14px rgba(255, 210, 122, .95)); }
+
+@keyframes negar {
+    0%, 100% { transform: translate(-50%, -50%) scale(var(--escala)) rotate(0); }
+    25% { transform: translate(-50%, -50%) scale(var(--escala)) rotate(-7deg); }
+    75% { transform: translate(-50%, -50%) scale(var(--escala)) rotate(7deg); }
+}
+
+@keyframes latido {
+    0% { transform: translate(-50%, -50%) scale(var(--escala)); }
+    35% { transform: translate(-50%, -50%) scale(calc(var(--escala) * 1.35)); }
+    100% { transform: translate(-50%, -50%) scale(calc(var(--escala) * 1.12)); }
+}
+
+/* ---------- Snoopy en escena ---------- */
+
+.snoopy-escena {
+    position: absolute;
+    image-rendering: pixelated;
+    transform: translate(-50%, -100%);
+    transition: left 800ms cubic-bezier(.4, 0, .3, 1), bottom 800ms cubic-bezier(.4, 0, .3, 1);
+    z-index: 7;
+    filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .3));
+}
+
+.snoopy-escena.salta { animation: saltoSnoopy 620ms ease; }
+.snoopy-escena.niega { animation: niegaSnoopy 520ms ease; }
+
+@keyframes saltoSnoopy {
+    0%, 100% { transform: translate(-50%, -100%) translateY(0); }
+    35% { transform: translate(-50%, -100%) translateY(-24px); }
+    60% { transform: translate(-50%, -100%) translateY(-4px); }
+    78% { transform: translate(-50%, -100%) translateY(-12px); }
+}
+
+@keyframes niegaSnoopy {
+    0%, 100% { transform: translate(-50%, -100%) translateX(0); }
+    25% { transform: translate(-50%, -100%) translateX(-7px); }
+    75% { transform: translate(-50%, -100%) translateX(7px); }
+}
+
+/* ---------- Globo de diálogo (nunca se sale de la pantalla) ---------- */
+
+.globo {
+    position: absolute;
+    z-index: 9;
+    left: 50%;
+    bottom: calc(100% + 12px);
+    width: max-content;
+    max-width: min(260px, 62vw);
+    transform: translateX(calc(-50% + var(--ajuste, 0px)));
+    padding: 8px 13px;
+    border-radius: 14px;
+    background: rgba(255, 243, 226, .96);
+    color: var(--purpura-oscuro);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: center;
+    box-shadow: var(--sombra-flotante);
+    animation: aparecerGlobo 240ms ease both;
+}
+
+.globo::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - var(--ajuste, 0px));
+    bottom: -7px;
+    transform: translateX(-50%);
+    border: 7px solid transparent;
+    border-top-color: rgba(255, 243, 226, .96);
+    border-bottom: 0;
+}
+
+@keyframes aparecerGlobo {
+    from { opacity: 0; transform: translateX(calc(-50% + var(--ajuste, 0px))) scale(.92); }
+}
+
+.snoopy-escena.salta .globo, .snoopy-escena.niega .globo { animation: none; }
+
+/* ---------- Contador y mensajes ---------- */
+
+.contador-nivel {
+    position: absolute;
+    left: 50%;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 15px;
+    border-radius: 999px;
+    background: rgba(27, 16, 48, .7);
+    backdrop-filter: blur(6px);
+    font-size: 13.5px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.contador-nivel .material-symbols-outlined { font-size: 18px; color: var(--luz-calida); }
+
+#mensajeFlotante {
+    position: fixed;
+    z-index: 110;
+    left: 50%;
+    top: calc(64px + env(safe-area-inset-top));
+    transform: translateX(-50%);
+    max-width: 88vw;
+    text-align: center;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: rgba(27, 16, 48, .92);
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--sombra-flotante);
+    animation: aparecerAviso 240ms ease both;
+}
+
+@keyframes aparecerAviso {
+    from { opacity: 0; transform: translate(-50%, -8px); }
+}
+
+/* ---------- Partículas ---------- */
+
+.capa-particulas { pointer-events: none; z-index: 5; }
+
+.particula {
+    position: absolute;
+    border-radius: 50%;
+    opacity: .7;
+    filter: blur(.4px);
+    animation: flotar 8s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translate(0, 0); opacity: .25; }
+    50% { transform: translate(14px, -26px); opacity: .85; }
+}
+
+.decor-farola { position: absolute; bottom: 12%; transform: translateX(-50%); z-index: 4; pointer-events: none; }
+
+/* ==========================================================================
+   NIVEL 2 — puente de piedras
+   ========================================================================== */
+
+.piedra-puente {
+    position: absolute;
+    transform: translate(-50%, 50%) scale(var(--escala, 1));
+    width: clamp(62px, 10vw, 96px);
+    height: clamp(34px, 5.4vw, 52px);
+    padding: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 28%, #CFC4DE, #9C8FB6 65%, #7A6C97);
+    border: 2px solid rgba(62, 40, 94, .35);
+    box-shadow: 0 8px 14px rgba(20, 10, 35, .4);
+    transition: transform 200ms ease, opacity 420ms ease, background 300ms ease;
+}
+
+.piedra-puente:hover { transform: translate(-50%, 50%) scale(calc(var(--escala, 1) * 1.06)); }
+
+.piedra-puente.firme {
+    background: radial-gradient(circle at 34% 28%, #FFE7B8, var(--luz-calida) 60%, #E2A94F);
+    box-shadow: 0 0 20px rgba(255, 210, 122, .55), 0 8px 14px rgba(20, 10, 35, .4);
+}
+
+.piedra-puente.hundida {
+    background: radial-gradient(circle at 34% 28%, #6F5E92, #3C2F5E);
+    opacity: .55;
+    box-shadow: none;
+}
+
+.piedra-puente.hundida::after {
+    content: "close";
+    font-family: "Material Symbols Outlined";
+    font-size: 22px;
+    color: rgba(255, 243, 226, .7);
+    display: grid;
+    place-items: center;
+    height: 100%;
+}
+
+.piedra-puente.inalcanzable { opacity: .75; }
+
+/* La fila que se puede elegir ahora mismo: aro cálido y pulso suave. */
+.piedra-puente.actual:not(.hundida) {
+    box-shadow: 0 0 0 4px rgba(255, 210, 122, .55), 0 8px 14px rgba(20, 10, 35, .4);
+    animation: pulsoPiedra 1.8s ease-in-out infinite;
+}
+
+@keyframes pulsoPiedra {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(255, 210, 122, .35), 0 8px 14px rgba(20, 10, 35, .4); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 210, 122, .55), 0 8px 14px rgba(20, 10, 35, .4); }
+}
+
+.piedra-puente.hundida { animation: hundirPiedra 520ms ease forwards; }
+
+@keyframes hundirPiedra {
+    0% { transform: translate(-50%, 50%) scale(var(--escala, 1)); }
+    100% { transform: translate(-50%, 90%) scale(calc(var(--escala, 1) * .8)); opacity: .5; }
+}
+
+/* Piedra ya cruzada: queda atrás como huella firme, sin brillo ni clic. */
+.piedra-huella {
+    pointer-events: none;
+    box-shadow: none;
+    animation: none;
+    opacity: .85;
+}
+
+/* La piedra inicial (fila 0): donde Snoopy comienza, siempre fija. */
+.piedra-inicial {
+    z-index: 2;
+}
+
+.rio {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 0;
+    height: 74%;
+    background: linear-gradient(180deg, rgba(143, 195, 217, .18) 0%, rgba(143, 195, 217, .5) 100%);
+    z-index: 3;
+}
+
+/* ---------- Nivel 2 (nueva dinámica): piedras numeradas, sin orden oculto ---------- */
+
+.piedra-numerada {
+    position: absolute;
+    transform: translate(-50%, 50%);
+    width: clamp(58px, 9vw, 84px);
+    height: clamp(58px, 9vw, 84px);
+    padding: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 34% 28%, #CFC4DE, #9C8FB6 65%, #7A6C97);
+    border: 2px solid rgba(62, 40, 94, .35);
+    box-shadow: 0 8px 14px rgba(20, 10, 35, .4);
+    transition: transform 200ms ease, background 260ms ease, box-shadow 260ms ease;
+    z-index: 5;
+}
+
+.piedra-numerada:hover { transform: translate(-50%, 50%) scale(1.05); }
+
+.piedra-numerada .piedra-numero {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    color: var(--purpura-oscuro);
+}
+
+.piedra-numerada.hecha {
+    background: radial-gradient(circle at 34% 28%, #FFE7B8, var(--luz-calida) 60%, #E2A94F);
+    box-shadow: 0 0 18px rgba(255, 210, 122, .6), 0 8px 14px rgba(20, 10, 35, .4);
+    pointer-events: none;
+}
+
+.piedra-numerada.hecha .piedra-numero { color: rgba(62, 40, 94, .55); }
+
+.piedra-numerada.error { animation: negarPiedraNumerada 380ms ease; }
+
+@keyframes negarPiedraNumerada {
+    0%, 100% { transform: translate(-50%, 50%) rotate(0); }
+    25% { transform: translate(-50%, 50%) rotate(-7deg); }
+    75% { transform: translate(-50%, 50%) rotate(7deg); }
+}
+
+/* ==========================================================================
+   NIVEL 3 — caja de recuerdos
+   ========================================================================== */
+
+/* El cofre ahora es una secuencia de 4 fotogramas reales (cerrado, 25%,
+   50%, abierto) que se van cambiando por JS; sin animación 3D de tapa. */
+.cofre {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(170px, 24vw, 240px);
+    z-index: 6;
+}
+
+.cofre-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 14px 20px rgba(20, 10, 35, .4));
+}
+
+.halo-cofre {
+    position: absolute;
+    left: 50%; top: 42%;
+    width: 220px; height: 160px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 210, 122, .75), transparent 68%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 900ms ease 200ms;
+}
+
+.cofre.abierto .halo-cofre { opacity: 1; }
+
+.inventario {
+    position: absolute;
+    left: 50%;
+    bottom: calc(58px + env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    z-index: 9;
+    display: flex;
+    gap: 10px;
+}
+
+.pieza-inventario {
+    width: 48px; height: 48px;
+    display: grid; place-items: center;
+    border-radius: 14px;
+    background: rgba(255, 243, 226, .12);
+    border: 1px dashed rgba(255, 243, 226, .35);
+    transition: transform var(--transicion), background var(--transicion);
+}
+
+.pieza-inventario.llena {
+    background: rgba(255, 210, 122, .18);
+    border-style: solid;
+    border-color: rgba(255, 210, 122, .8);
+}
+
+.pieza-inventario.llena:hover { transform: translateY(-4px); }
+.pieza-inventario.colocada { opacity: .35; pointer-events: none; }
+
+/* ==========================================================================
+   NIVEL 4 — cartas
+   ========================================================================== */
+
+.mesa-cartas {
+    position: absolute;
+    left: 50%; top: 52%;
+    transform: translate(-50%, -50%);
+    z-index: 7;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(7px, 1.4vw, 16px);
+    width: min(72vw, 560px, 80vh);
+}
+
+.carta { position: relative; aspect-ratio: 3 / 4; perspective: 700px; padding: 0; background: none; }
+
+.carta-interior {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transition: transform 440ms cubic-bezier(.3, .8, .3, 1);
+    border-radius: 12px;
+}
+
+.carta.volteada .carta-interior,
+.carta.resuelta .carta-interior { transform: rotateY(180deg); }
+
+.carta-cara {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    backface-visibility: hidden;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .35);
+    overflow: hidden;
+}
+
+.carta-reverso {
+    background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, .18), transparent 55%),
+        repeating-linear-gradient(45deg, #6E4C9B 0 10px, #5E4088 10px 20px);
+    border: 2px solid rgba(255, 210, 122, .45);
+}
+
+.carta-frente {
+    transform: rotateY(180deg);
+    background: linear-gradient(160deg, #FFF6E8 0%, #F6DFEC 100%);
+    border: 2px solid rgba(216, 91, 159, .5);
+}
+
+.carta-frente svg { width: 64%; height: 64%; }
+.carta.resuelta { filter: drop-shadow(0 0 12px rgba(255, 210, 122, .7)); }
+.carta.resuelta .carta-frente { border-color: var(--luz-calida); }
+
+/* ==========================================================================
+   NIVEL 5 — luces
+   ========================================================================== */
+
+.fila-luces {
+    position: absolute;
+    left: 50%; top: 54%;
+    transform: translate(-50%, -50%);
+    z-index: 7;
+    display: flex;
+    gap: clamp(10px, 2.6vw, 34px);
+}
+
+.luz {
+    width: clamp(44px, 6.6vw, 72px);
+    height: clamp(44px, 6.6vw, 72px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #6B5A8E, #3B2A5C);
+    border: 2px solid rgba(255, 255, 255, .22);
+    box-shadow: inset 0 3px 10px rgba(0, 0, 0, .5);
+    transition: background 160ms ease, box-shadow 220ms ease, transform 160ms ease;
+}
+
+.luz.encendida {
+    background: radial-gradient(circle at 35% 30%, #FFF0C6, var(--luz-calida) 65%, #E9A94F);
+    box-shadow: 0 0 34px 8px rgba(255, 210, 122, .65), inset 0 0 12px rgba(255, 255, 255, .8);
+    transform: scale(1.07);
+}
+
+.luz.fallo {
+    background: radial-gradient(circle at 35% 30%, #F7B5CE, var(--rosa) 70%);
+    box-shadow: 0 0 26px 6px rgba(216, 91, 159, .6);
+}
+
+.luces-bloqueadas .luz { pointer-events: none; }
+
+/* ==========================================================================
+   NIVEL 5 — estrellas del corazón
+   ========================================================================== */
+
+.estrella-interactiva {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    z-index: 7;
+}
+
+/* Área de toque más grande que el dibujo, para que sea fácil de tocar. */
+.estrella-interactiva::before {
+    content: "";
+    position: absolute;
+    inset: -16px;
+}
+
+.estrella-punta {
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 243, 226, .55);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    transition: background 240ms ease, transform 240ms ease, filter 240ms ease;
+    animation: parpadeoEstrella 1.8s ease-in-out infinite;
+}
+
+@keyframes parpadeoEstrella {
+    0%, 100% { opacity: .55; transform: scale(.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+.estrella-interactiva.hecha .estrella-punta {
+    background: var(--luz-calida);
+    filter: drop-shadow(0 0 10px rgba(255, 210, 122, .85));
+    animation: none;
+    transform: scale(1.2);
+}
+
+.trazo-corazon {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 400ms ease;
+}
+
+.trazo-corazon.visible { opacity: 1; }
+
+.trazo-corazon path {
+    fill: none;
+    stroke: var(--luz-calida);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px rgba(255, 210, 122, .8));
+}
+
+.trazo-corazon.cerrado path {
+    fill: rgba(255, 210, 122, .18);
+}
+
+/* ==========================================================================
+   NIVEL 6 — pistas
+   ========================================================================== */
+
+/* Las pistas deben verse siempre por encima de la decoración de la
+   escena (por ejemplo, la imagen de la fuente): si no, quedan tapadas y
+   son invisibles aunque sigan estando ahí. */
+.pista { z-index: 6; }
+.pista svg { animation: brillar 2.6s ease-in-out infinite; }
+.pista.pista-lista svg { animation: none; }
+
+@keyframes brillar {
+    0%, 100% { opacity: .35; }
+    50% { opacity: .95; }
+}
+
+.fuente-imagen {
+    position: absolute;
+    left: 50%; top: 56%;
+    transform: translate(-50%, -50%);
+    width: clamp(170px, 26vw, 300px);
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0 10px 14px rgba(20, 10, 35, .35));
+}
+
+/* ==========================================================================
+   NIVEL 7 — laberinto
+   ========================================================================== */
+
+.laberinto {
+    position: absolute;
+    left: 50%; top: 54%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    display: grid;
+    gap: 2px;
+    width: min(86vw, 640px, calc(60vh * 1.57));
+    aspect-ratio: 11 / 7;
+    padding: 8px;
+    border-radius: 16px;
+    background: rgba(27, 16, 48, .55);
+    border: 1px solid rgba(255, 243, 226, .18);
+    box-shadow: var(--sombra-flotante);
+}
+
+.celda { border-radius: 4px; background: rgba(255, 243, 226, .1); }
+.celda.muro { background: linear-gradient(180deg, #4A2F6B, #35204F); border-radius: 5px; }
+.celda.libre { cursor: pointer; }
+.celda.libre:hover { background: rgba(255, 210, 122, .25); }
+.celda.meta { background: radial-gradient(circle, rgba(255, 210, 122, .85), rgba(255, 210, 122, .25)); animation: brillar 2.2s ease-in-out infinite; }
+.celda.camino { background: rgba(255, 210, 122, .35); }
+
+/* Celda vecina a la que Snoopy sí puede moverse ahora mismo. */
+.celda.libre.alcanzable {
+    box-shadow: inset 0 0 0 2px rgba(255, 210, 122, .55);
+}
+
+/* Intento de moverse a una celda que no es vecina: pequeño rechazo. */
+.celda.celda-error { animation: negarCelda 320ms ease; }
+
+@keyframes negarCelda {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+.snoopy-laberinto {
+    position: absolute;
+    image-rendering: pixelated;
+    z-index: 8;
+    transform: translate(-50%, -60%);
+    transition: left 180ms linear, top 180ms linear;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .35));
+}
+
+.objeto-final {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    z-index: 9;
+    transition: transform 700ms cubic-bezier(.3, .8, .3, 1), opacity 500ms ease;
+}
+
+.objeto-final svg { display: block; overflow: visible; }
+
+.halo-final {
+    position: absolute;
+    left: 50%; top: 45%;
+    width: 240px; height: 240px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 210, 122, .35), transparent 65%);
+    animation: latidoHalo 3.2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes latidoHalo {
+    0%, 100% { opacity: .45; transform: translate(-50%, -50%) scale(.92); }
+    50% { opacity: .95; transform: translate(-50%, -50%) scale(1.06); }
+}
+
+.objeto-final.abierto { transform: translate(-50%, -50%) scale(1.15); }
+.objeto-final.abierto .halo-final { animation-duration: 1.1s; }
+
+/* ==========================================================================
+   FRAGMENTOS DE LA FOTOGRAFÍA
+   ========================================================================== */
+
+/* El recorte concreto (qué franja de la foto se ve) se fija por JS en
+   línea (background-image/size/position), no aquí: así funciona igual en
+   cualquier navegador, sin depender de calc()+var() para la posición. */
+.fragmento {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Todavía no obtenido */
+.fragmento.bloqueado {
+    filter: blur(10px) contrast(.5) saturate(.2) brightness(.65);
+    opacity: .28;
+    transform: scaleY(.94) skewY(1.6deg);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 35%, #000 65%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 35%, #000 65%, transparent);
+}
+
+/* Obtenido, pero la foto sigue siendo sorpresa hasta el final */
+.fragmento.pixelado { filter: blur(7px) saturate(.85) contrast(.9); }
+
+.fragmento.pixelado::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(27, 16, 48, .55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(27, 16, 48, .55) 1px, transparent 1px);
+    background-size: 14px 14px, 14px 14px;
+    mix-blend-mode: normal;
+}
+
+.fragmento.libre {
+    filter: none;
+    opacity: 1;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+.fragmento.libre::after { content: none; }
+
+/* ==========================================================================
+   PANTALLA DE RECOMPENSA
+   ========================================================================== */
+
+#pantallaRecompensa {
+    z-index: 70;
+    background: rgba(18, 10, 34, .82);
+    backdrop-filter: blur(10px);
+    animation: aparecerCapa 340ms ease both;
+}
+
+@keyframes aparecerCapa { from { opacity: 0; } }
+
+.tarjeta-recompensa {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: clamp(14px, 2.6vw, 32px);
+    width: min(1000px, 96vw);
+    max-height: 94vh;
+    overflow: auto;
+    padding: clamp(16px, 2.6vw, 28px);
+    border-radius: 24px;
+    background: linear-gradient(150deg, #3A2560 0%, #2A1A48 100%);
+    border: 1px solid rgba(255, 210, 122, .28);
+    box-shadow: var(--sombra-flotante);
+    animation: subirTarjeta 420ms cubic-bezier(.2, .8, .3, 1) both;
+}
+
+@keyframes subirTarjeta { from { opacity: 0; transform: translateY(24px) scale(.97); } }
+
+.recompensa-etiqueta { margin: 0 0 6px; font-size: 12.5px; color: var(--luz-calida); font-weight: 600; }
+
+.recompensa-izquierda h2 {
+    margin: 0 0 10px;
+    font-size: clamp(19px, 2.4vw, 26px);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.recompensa-frase {
+    margin: 0 0 18px;
+    max-width: 46ch;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(255, 243, 226, .9);
+}
+
+.recompensa-derecha { display: flex; flex-direction: column; gap: 10px; }
+
+.fragmento-nuevo {
+    position: relative;
+    height: clamp(96px, 20vh, 200px);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 210, 122, .45);
+    background-color: rgba(0, 0, 0, .25);
+    overflow: hidden;
+    box-shadow: 0 0 26px rgba(255, 210, 122, .25);
+    animation: revelarFragmento 900ms ease both;
+}
+
+@keyframes revelarFragmento {
+    0% { opacity: 0; transform: scale(1.1); }
+    100% { opacity: 1; transform: none; }
+}
+
+.mosaico-progreso {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    height: 54px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .3);
+}
+
+.mosaico-progreso .fragmento { border-radius: 2px; }
+
+.texto-progreso { margin: 0; font-size: 12.5px; color: rgba(255, 243, 226, .72); }
+
+.recompensa-derecha .boton-principal { margin-top: auto; }
+
+/* ==========================================================================
+   REPRODUCTOR
+   ========================================================================== */
+
+.reproductor {
+    padding: 12px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .12);
+}
+
+.reproductor-fila { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.boton-reproducir { width: 46px; height: 46px; background: var(--luz-calida); color: #3B2A0F; }
+.boton-reproducir:hover { background: #FFDE9C; }
+
+.reproductor-barra { flex: 1 1 170px; min-width: 140px; }
+
+.reproductor-tiempos {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+    font-size: 11.5px;
+    color: rgba(255, 243, 226, .68);
+    font-variant-numeric: tabular-nums;
+}
+
+.reproductor-volumen { display: flex; align-items: center; gap: 8px; }
+.reproductor-volumen .material-symbols-outlined { font-size: 20px; color: rgba(255, 243, 226, .8); }
+.rango-volumen { width: 84px; }
+
+.rango {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--luz-calida) var(--relleno, 0%), rgba(255, 255, 255, .18) var(--relleno, 0%));
+    cursor: pointer;
+}
+
+.rango::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .4);
+}
+
+.rango::-moz-range-thumb { width: 16px; height: 16px; border: none; border-radius: 50%; background: #fff; }
+
+/* ==========================================================================
+   ESCENA FINAL
+   ========================================================================== */
+
+#escenaFinal {
+    z-index: 80;
+    flex-direction: column;
+    overflow: auto;
+    padding-top: calc(62px + env(safe-area-inset-top));
+}
+
+.final-cielo {
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(60% 50% at 50% 18%, rgba(255, 210, 122, .22), transparent 70%),
+        radial-gradient(90% 70% at 20% 90%, rgba(216, 91, 159, .25), transparent 70%),
+        linear-gradient(180deg, #2B1A4E 0%, #1C1134 100%);
+}
+
+.final-contenido {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: min(1000px, 96vw);
+}
+
+.marco-foto {
+    position: relative;
+    width: min(760px, 88vw);
+    aspect-ratio: 4 / 3;
+    max-height: 52vh;
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, .35);
+    box-shadow: 0 0 0 7px rgba(255, 243, 226, .9), 0 24px 50px rgba(0, 0, 0, .5);
+}
+
+.marco-foto .fragmento {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: calc(100% / 7);
+    left: calc(var(--i) * (100% / 7));
+    transition: transform 1500ms cubic-bezier(.2, .75, .25, 1),
+                filter 1200ms ease 900ms,
+                opacity 1200ms ease 900ms;
+}
+
+.final-pie { display: flex; align-items: flex-end; gap: 12px; max-width: 68ch; }
+.snoopy-final { width: 58px; height: 72px; image-rendering: pixelated; flex: none; }
+
+.mensaje-final { margin: 0 0 6px; font-size: clamp(13.5px, 1.6vw, 17px); line-height: 1.55; color: var(--crema); }
+
+.reproductor-final { width: min(640px, 92vw); }
+
+.acciones-finales { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.estrella {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: .75;
+    animation: titilar 3.4s ease-in-out infinite;
+}
+
+@keyframes titilar {
+    0%, 100% { opacity: .2; }
+    50% { opacity: .9; }
+}
+
+/* ==========================================================================
+   PANTALLAS PEQUEÑAS
+   ========================================================================== */
+
+@media (max-width: 900px) {
+    .punto { --escala: .8; }
+    .piedra-puente { --escala: .85; }
+    .piedra-numerada { width: clamp(48px, 13vw, 68px); height: clamp(48px, 13vw, 68px); }
+    .piedra-numerada .piedra-numero { font-size: clamp(16px, 4vw, 22px); }
+    .decor-farola { transform: translateX(-50%) scale(.8); }
+    .objeto-final { transform: translate(-50%, -50%) scale(.82); }
+    .objeto-final.abierto { transform: translate(-50%, -50%) scale(.95); }
+    .cofre { width: clamp(130px, 30vw, 200px); }
+    .pieza-inventario { width: 44px; height: 44px; }
+    .tarjeta-recompensa { grid-template-columns: 1fr; }
+    .fragmento-nuevo { height: 92px; }
+    .mosaico-progreso { height: 40px; }
+    .hud-textos p { display: none; }
+}
+
+@media (max-height: 470px) {
+    .punto { --escala: .68; }
+    .piedra-puente { --escala: .72; }
+    .piedra-numerada { width: clamp(42px, 11vw, 54px); height: clamp(42px, 11vw, 54px); }
+    .globo { font-size: 12px; padding: 6px 11px; max-width: min(220px, 52vw); }
+    .mesa-cartas { width: min(62vw, 440px, 78vh); top: 50%; }
+    .inventario { bottom: calc(52px + env(safe-area-inset-bottom)); }
+    .contador-nivel { padding: 5px 12px; font-size: 12.5px; }
+    .laberinto { width: min(78vw, 540px, calc(56vh * 1.57)); }
+    .marco-foto { max-height: 46vh; }
+    .snoopy-carga { width: 62px; height: 78px; }
+    .tarjeta-recompensa { padding: 12px; border-radius: 18px; }
+    .recompensa-frase { margin-bottom: 10px; font-size: 13px; }
+    .fragmento-nuevo { height: 74px; }
+    .mosaico-progreso { height: 32px; }
+    .reproductor { padding: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
