@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Snoopy animado</title>
+<link rel="stylesheet" href="css/animacion.css">
+<style>
+  .btn-regresar {
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top, 0px));
+    left: 16px;
+    z-index: 20;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(0,0,0,.45);
+    color: #fff;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+  }
+  .btn-regresar:active {
+    background: rgba(0,0,0,.65);
+  }
+</style>
+</head>
+<body>
+
+  <a href="index.html" class="btn-regresar">&larr; Regresar</a>
+
+  <div class="snoopy-container">
+    <div class="escena">
+      <div class="casa"></div>
+      <div class="snoopy-body"></div>
+    </div>
+  </div>
+
+  <!-- Musica de fondo -->
+  <audio id="bgMusic" src="audio/level4.mp3" loop preload="auto"></audio>
+
+ 
+
+  <script src="js/animacion.js"></script>
+</body>
+</html>

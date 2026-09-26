@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Juegos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+  :root {
+    --snoopy-white: #fdfdfb;
+    --snoopy-black: #1c1c1c;
+    --snoopy-red: #d62828;
+    --snoopy-blue: #4a6fa5;
+    --snoopy-cream: #f4ecd8;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+    background: var(--snoopy-cream);
+    color: var(--snoopy-black);
+    min-height: 100vh;
+    padding: max(28px, env(safe-area-inset-top, 0px)) 20px
+      max(28px, env(safe-area-inset-bottom, 0px));
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 26px;
+    line-height: 1;
+    display: inline-block;
+    white-space: nowrap;
+    letter-spacing: normal;
+    text-transform: none;
+    font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24;
+    color: var(--snoopy-blue);
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 2.4rem;
+  }
+
+  header h1 {
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    margin: 0 0 0.4rem;
+    color: var(--snoopy-red);
+    letter-spacing: 0.5px;
+  }
+
+  header p {
+    margin: 0;
+    font-size: clamp(1rem, 3vw, 1.15rem);
+    color: var(--snoopy-black);
+    opacity: 0.7;
+  }
+
+  .lista {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .juego {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--snoopy-white);
+    border: 2px solid var(--snoopy-black);
+    border-radius: 16px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 3px 0 var(--snoopy-black);
+  }
+
+  .juego:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--snoopy-black);
+  }
+
+  .icono {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    background: var(--snoopy-cream);
+    border: 2px solid var(--snoopy-blue);
+  }
+
+  .texto h2 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+    color: var(--snoopy-black);
+  }
+
+  .texto p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--snoopy-black);
+    opacity: 0.65;
+    line-height: 1.35;
+  }
+
+  .regresar {
+    display: block;
+    width: fit-content;
+    margin: 2.6rem auto 0;
+    background: var(--snoopy-black);
+    color: var(--snoopy-white);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 999px;
+    border: 2px solid var(--snoopy-red);
+  }
+
+  .regresar:active {
+    transform: scale(0.97);
+  }
+
+  @media (min-width: 560px) {
+    .lista {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Juegos</h1>
+    <p>Elige uno para empezar a jugar</p>
+  </header>
+
+  <div class="lista">
+    <a class="juego" href="juegos/atrapa/index.html">
+      <div class="icono"><span class="material-symbols-outlined">pets</span></div>
+      <div class="texto">
+        <h2>Atrapa a Snoopy</h2>
+        <p>El clásico juego de golpear al topo, ahora con Snoopy asomándose desde sus escondites.</p>
+      </div>
+    </a>
+
+    <a class="juego" href="juegos/crossy-road/index.html">
+      <div class="icono"><span class="material-symbols-outlined">directions_car</span></div>
+      <div class="texto">
+        <h2>Cruza el camino</h2>
+        <p>Avanza por el camino esquivando los autos sin detenerte.</p>
+      </div>
+    </a>
+
+    <a class="juego" href="juegos/saltos/index.html">
+      <div class="icono"><span class="material-symbols-outlined">cloud</span></div>
+      <div class="texto">
+        <h2>Saltos en las nubes</h2>
+        <p>Salta de nube en nube y llega lo más alto posible sin caer.</p>
+      </div>
+    </a>
+
+    <a class="juego" href="juegos/torres/index.html">
+      <div class="icono"><span class="material-symbols-outlined">layers</span></div>
+      <div class="texto">
+        <h2>Torres</h2>
+        <p>Apila los bloques con precisión y construye la torre más alta sin quedarte sin piezas.</p>
+      </div>
+    </a>
+  </div>
+
+  <a class="regresar" href="index.html">
+    <span class="material-symbols-outlined" style="color: inherit; vertical-align: middle; margin-right: 4px;">arrow_back</span>
+    Regresar al inicio
+  </a>
+</div>
+
+<script>
+  // En móvil, se intenta entrar en pantalla completa apenas carga la página.
+  // Los navegadores exigen un gesto del usuario, así que si el primer intento
+  // se rechaza en silencio, se reintenta solo en el primer toque/clic real.
+  var isMobile = /Android|iPhone|iPad|iPod|Mobile|Windows Phone/i.test(
+    navigator.userAgent
+  );
+
+  function requestFullscreen() {
+    var el = document.documentElement;
+    var requestFs =
+      el.requestFullscreen ||
+      el.webkitRequestFullscreen ||
+      el.mozRequestFullScreen ||
+      el.msRequestFullscreen;
+    if (!requestFs) return Promise.reject();
+    var result = requestFs.call(el);
+    return result && result.catch ? result : Promise.resolve();
+  }
+
+  function isFullscreen() {
+    return !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+  }
+
+  if (isMobile && !isFullscreen()) {
+    requestFullscreen().catch(function () {});
+  }
+
+  var firstInteractionHandled = false;
+  document.addEventListener(
+    "pointerdown",
+    function () {
+      if (firstInteractionHandled || !isMobile) return;
+      firstInteractionHandled = true;
+      requestFullscreen().catch(function () {});
+    },
+    { passive: true }
+  );
+</script>
+</body>
+</html>

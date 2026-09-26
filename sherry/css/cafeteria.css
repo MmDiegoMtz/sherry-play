@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #1a1008;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #fff;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.oculto { display: none !important; }
+
+#lienzo {
+    position: fixed;
+    inset: 0;
+    display: block;
+    touch-action: none;
+    background: #1a1008;
+}
+
+/* ---------- Pantallas de carga / bienvenida ---------- */
+.pantalla {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    text-align: center;
+    padding: 24px;
+    background: radial-gradient(circle at 50% 30%, #4a2f1c 0%, #1a1008 75%);
+}
+
+#tituloCarga {
+    font-size: clamp(18px, 4vw, 26px);
+    letter-spacing: .5px;
+    opacity: .9;
+    animation: pulso 1.4s ease-in-out infinite;
+}
+
+#tituloBienvenida {
+    font-size: clamp(22px, 5vw, 34px);
+    margin: 0;
+}
+
+#preguntaMusica {
+    font-size: clamp(15px, 3vw, 18px);
+    opacity: .85;
+    margin: 0;
+}
+
+.botones-musica {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#btnMusicaSi, #btnMusicaNo {
+    padding: 12px 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+}
+
+#btnMusicaSi { background: #C1673F; border-color: #C1673F; }
+
+#btnMusicaSi:hover, #btnMusicaNo:hover { transform: translateY(-1px); }
+#btnMusicaSi:active, #btnMusicaNo:active { transform: translateY(0); }
+
+@keyframes pulso {
+    0%, 100% { opacity: .55; }
+    50%      { opacity: 1; }
+}
+
+/* ---------- Aviso de orientación (móvil vertical) ---------- */
+#avisoOrientacion {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+    background: rgba(10, 6, 3, .92);
+}
+
+#avisoOrientacion p {
+    font-size: 18px;
+    max-width: 300px;
+    margin: 0;
+}
+
+/* ---------- Pista de teclado (escritorio) ---------- */
+#pistaTeclado {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 15;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.45);
+    border: 1px solid rgba(255,255,255,.25);
+    font-size: 13px;
+    letter-spacing: .3px;
+    opacity: .85;
+}
+
+/* ---------- Botón de música flotante ---------- */
+#btnAlternarMusica {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 20;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.35);
+    background: rgba(0,0,0,.45);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+
+#btnAlternarMusica .material-symbols-outlined {
+    font-size: 24px;
+}
+
+/* ---------- Aviso de descubrimiento (pequeño, transitorio) ---------- */
+#avisoDescubrimiento {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.5);
+    border: 1px solid rgba(255,255,255,.3);
+    font-size: 14px;
+    animation: pulso 1s ease-in-out infinite;
+}
+
+/* ---------- Capa de mensaje (modal) ---------- */
+#capaMensaje {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 6, 3, .7);
+}
+
+.cuadro-mensaje {
+    max-width: 420px;
+    width: 100%;
+    background: #F7EEDD;
+    color: #3a2415;
+    border-radius: 18px;
+    padding: 26px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,.4);
+}
+
+.cuadro-mensaje p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 18px;
+}
+
+#btnCerrarMensaje {
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: none;
+    background: #C1673F;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* ---------- Controles táctiles (D-Pad) ---------- */
+#controlesTactiles {
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(3, 56px);
+    gap: 4px;
+}
+
+.boton-dpad {
+    grid-column: 2;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.boton-dpad.activo {
+    background: rgba(255,255,255,.4);
+}
+
+.boton-dpad[data-direccion="arriba"]    { grid-row: 1; grid-column: 2; }
+.boton-dpad[data-direccion="izquierda"] { grid-row: 2; grid-column: 1; }
+.boton-dpad[data-direccion="derecha"]   { grid-row: 2; grid-column: 3; }
+.boton-dpad[data-direccion="abajo"]     { grid-row: 3; grid-column: 2; }

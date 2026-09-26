@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Aventura musical</title>
+<link rel="stylesheet" href="css/musica.css">
+</head>
+<body>
+
+<!-- ===================== PANTALLA DE INICIO / CARGA ===================== -->
+<div id="pantallaCarga" class="capa capa-solida">
+    <div class="carga-contenido">
+        <canvas id="snoopyCarga" class="snoopy-carga"></canvas>
+        <h1 class="titulo-juego">Una aventura para ti</h1>
+        <p class="subtitulo-juego">Siete lugares, siete canciones y una fotografía que solo se descubre al final.</p>
+        <p id="estadoCarga" class="estado-carga">Preparando la aventura...</p>
+        <button id="btnComenzar" class="boton-principal oculto">
+            <span class="material-symbols-outlined">play_arrow</span>
+            <span>Comenzar la aventura</span>
+        </button>
+    </div>
+</div>
+
+<!-- ===================== AVISO DE ORIENTACIÓN ===================== -->
+<div id="avisoOrientacion" class="capa capa-solida oculto">
+    <span class="material-symbols-outlined icono-girar">screen_rotation</span>
+    <p class="texto-girar">Gira tu teléfono para continuar</p>
+</div>
+
+<!-- ===================== HUD ===================== -->
+<header id="hud" class="oculto">
+    <div class="hud-nivel">
+        <button id="btnBosque" class="boton-icono" title="Regresar al bosque">
+            <span class="material-symbols-outlined">forest</span>
+        </button>
+        <span id="hudNumeroNivel" class="hud-numero">1</span>
+        <div class="hud-textos">
+            <h2 id="hudTitulo">El jardín de los recuerdos</h2>
+            <p id="hudObjetivo">Encuentra la flor amarilla</p>
+        </div>
+    </div>
+
+    <div class="hud-derecha">
+        <div id="tiraFragmentos" class="tira-fragmentos" aria-label="Fragmentos de la fotografía"></div>
+    </div>
+</header>
+
+<!-- ===================== ESCENA DEL NIVEL ===================== -->
+<main id="escena"></main>
+
+<!-- ===================== MENSAJE FLOTANTE ===================== -->
+<div id="mensajeFlotante" class="oculto"></div>
+
+<!-- ===================== PANTALLA DE RECOMPENSA ===================== -->
+<div id="pantallaRecompensa" class="capa oculto">
+    <div class="tarjeta-recompensa">
+        <div class="recompensa-izquierda">
+            <p class="recompensa-etiqueta">Nivel completado</p>
+            <h2 id="recompensaTitulo">El jardín de los recuerdos</h2>
+            <p id="recompensaFrase" class="recompensa-frase"></p>
+
+            <div class="reproductor">
+                <div class="reproductor-fila">
+                    <button id="btnReproducir" class="boton-icono boton-reproducir">
+                        <span class="material-symbols-outlined">play_arrow</span>
+                    </button>
+                    <button id="btnReiniciarCancion" class="boton-icono" title="Volver a empezar la canción">
+                        <span class="material-symbols-outlined">replay</span>
+                    </button>
+                    <div class="reproductor-barra">
+                        <input id="barraProgreso" class="rango" type="range" min="0" max="1000" value="0" step="1">
+                        <div class="reproductor-tiempos">
+                            <span id="tiempoActual">0:00</span>
+                            <span id="tiempoTotal">0:00</span>
+                        </div>
+                    </div>
+                    <div class="reproductor-volumen">
+                        <span class="material-symbols-outlined">volume_up</span>
+                        <input id="barraVolumen" class="rango rango-volumen" type="range" min="0" max="100" value="80" step="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recompensa-derecha">
+            <p class="recompensa-etiqueta">Fragmento obtenido</p>
+            <div id="fragmentoNuevo" class="fragmento-nuevo"></div>
+            <div id="mosaicoProgreso" class="mosaico-progreso"></div>
+            <p id="textoProgresoFoto" class="texto-progreso"></p>
+            <button id="btnContinuar" class="boton-principal">
+                <span id="textoContinuar">Continuar aventura</span>
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ESCENA FINAL ===================== -->
+<div id="escenaFinal" class="capa oculto">
+    <div class="final-cielo"></div>
+    <div class="final-contenido">
+        <div id="marcoFoto" class="marco-foto"></div>
+        <div class="final-pie">
+            <canvas id="snoopyFinal" class="snoopy-final"></canvas>
+            <p id="mensajeFinal" class="mensaje-final"></p>
+        </div>
+        <div id="reproductorFinal" class="reproductor reproductor-final oculto">
+            <div class="reproductor-fila">
+                <button id="btnReproducirFinal" class="boton-icono boton-reproducir">
+                    <span class="material-symbols-outlined">play_arrow</span>
+                </button>
+                <button id="btnReiniciarFinal" class="boton-icono" title="Volver a empezar la canción">
+                    <span class="material-symbols-outlined">replay</span>
+                </button>
+                <div class="reproductor-barra">
+                    <input id="barraProgresoFinal" class="rango" type="range" min="0" max="1000" value="0" step="1">
+                    <div class="reproductor-tiempos">
+                        <span id="tiempoActualFinal">0:00</span>
+                        <span id="tiempoTotalFinal">0:00</span>
+                    </div>
+                </div>
+                <div class="reproductor-volumen">
+                    <span class="material-symbols-outlined">volume_up</span>
+                    <input id="barraVolumenFinal" class="rango rango-volumen" type="range" min="0" max="100" value="80" step="1">
+                </div>
+            </div>
+        </div>
+        <div id="accionesFinales" class="acciones-finales oculto">
+            <button id="btnJugarOtraVez" class="boton-principal boton-secundario">
+                <span class="material-symbols-outlined">restart_alt</span>
+                <span>Jugar otra vez</span>
+            </button>
+            <a class="boton-principal boton-secundario" href="index.html">
+                <span class="material-symbols-outlined">forest</span>
+                <span>Regresar al bosque</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="js/musica.js"></script>
+</body>
+</html>
